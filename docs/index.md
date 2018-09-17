@@ -10,6 +10,7 @@ Para un correcto seguimiento del curso el alumno deberá tener conocimientos de:
 Será necesario tener instalado en el equipo:
 
 * [npm Linux](https://nodejs.org/en/download/package-manager/) [npm Windows](https://nodejs.org/en/download/)
+* [reload](https://www.npmjs.com/package/reload) o cualquier otro servidor web (Apache, nginx...) con el que el alumno se sienta cómodo
 
 ## Objetivo
 El objetivo del curso es hacer una introducción al webgis a través del uso de las librerías de mapas Leaflet y OpenLayers. Estas son las librerías de referencia dentro del software libre para la creación de mapas en la web.

@@ -1,3 +1,11 @@
 site_name: Curso WebGIS. Mapas libres con Leaflet y OpenLayers
 theme:
-  name: 'material'
+  name: material
+  language: 'es'
+markdown_extensions:
+  - codehilite:
+      linenums: True
+  - admonition
+nav:
+  - Home: index.md
+  - 1. Creando un mapa: 1_creando_mapa.md
