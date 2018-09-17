@@ -58,7 +58,7 @@ De momento no tendremos acceso al mapa. Lo primero que haremos será, mediante c
   <body>
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
     <script type="text/javascript">
-      var map = new ol.Map();
+      let map = new ol.Map();
     </script>
   </body>
 </html>
@@ -77,7 +77,7 @@ si vamos a nuestro navegador no veremos nada aun. Ahora tenemos un mapa, pero ne
     <div id="map" class="map"></div>
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
     <script type="text/javascript">
-      var map = new ol.Map({
+      let map = new ol.Map({
         target: 'map'
       });
     </script>
@@ -113,7 +113,7 @@ Crearemos un objeto vista con centro en Vigo y un nivel de zoom dado y se lo pas
     <div id="map" class="map"></div>
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
     <script type="text/javascript">
-      var map = new ol.Map({
+      let map = new ol.Map({
         target: 'map',
         view: new ol.View({
           center: ol.proj.fromLonLat([-8.72, 42.24]),
@@ -143,7 +143,7 @@ Si ahora vamos a [http://localhost:8080](http://localhost:8080), ¡seguimos sin 
     <div id="map" class="map"></div>
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
     <script type="text/javascript">
-      var map = new ol.Map({
+      let map = new ol.Map({
         target: 'map',
         layers: [
           new ol.layer.Tile({
@@ -178,7 +178,7 @@ Si le añaimos un poco de estilo con alguna regla CSS
     <div id="map" class="map"></div>
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
     <script type="text/javascript">
-      var map = new ol.Map({
+      let map = new ol.Map({
         target: 'map',
         layers: [
           new ol.layer.Tile({

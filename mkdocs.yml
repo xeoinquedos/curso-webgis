@@ -9,3 +9,4 @@ markdown_extensions:
 nav:
   - Home: index.md
   - 1. Creando un mapa: 1_creando_mapa.md
+  - 2. El mapa sin datos. Añadir una capa base: 2_capas_base.md
