@@ -11,7 +11,7 @@ Estas compañías de servicios de mapas generalmente funcionan con pago por cons
 Para obtener una key que nos permita el uso de estos datos iremos a [https://www.bingmapsportal.com/](https://www.bingmapsportal.com/).
 
 !!! tip
-    Para uso durante el curso podréis usar la key AqU3C-Sa7exTZ1zqoy25oXm8H0MFgMxG3_ZKV87ZVZcX27RIzUrNQ5rQOV1DKt3t
+    Para uso durante el curso podréis usar la key **AqU3C-Sa7exTZ1zqoy25oXm8H0MFgMxG3_ZKV87ZVZcX27RIzUrNQ5rQOV1DKt3t**
 
 Siguiendo con el ejemplo anterior, sustituiremos la capa de OSM por la nueva de Bing y añadiremos un control que nos permita cambiar entre las diferentes tipos de capas de Bing
 
@@ -146,3 +146,130 @@ De momento tendremos un mapa con unas capas sin visibilidad. Ahora crearemos un 
   </body>
 </html>
 ```
+
+## Google Maps
+Google ha hecho mucho hincapie en que los desarrolladores usen sus librerías para el consumo de sus servicios. Aun así, se han ido articulando caminos para poder hacer uso de sus servicios de mapas desde librerías externas. En el caso de OpenLayers, en su versión actual 5.2.0, la gente de [Mapgears](http://www.mapgears.com/) han implementado una librería que permite realizar este uso de los servicios de Google desde OL. Como en el caso de Bing, será necesario obtener una key para poder acceder a los mapas. 
+
+!!! tip
+    Documentación para la creación de API keys de Google [https://developers.google.com/maps/documentation/javascript/get-api-key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
+!!! tip
+    Para el curso se podrá utilizar la key **AIzaSyCqPQ0dabDFcqSrjGVLvWGyDU3RSgAXayo**
+
+Para hacer uso de esta librería necesitaremos tener un gestor de paquetes como `npm` con el que importar la librería de Mapgears. Para ello crearemos una carpeta `ol-googlemaps` y dentro de ella arrancaremos nuestro proyecto usando `npm`
+
+```bash
+$ mkdir ol-googlemaps
+$ cd ol-googlemaps
+$ npm init
+```
+
+Una vez terminado el proceso de creación de nuestro proyecto instalaremos las dependencias del mismo, `openlayers` y `olgm`
+
+```bash
+$ npm install ol olgm
+```
+
+Para poder hacer uso de las librerías deberemos instalar una herramienta que nos permita este uso
+
+```bash
+$ npm install --save-dev parcel-bundler
+```
+
+Dentro de la carpeta `ol-googlemaps` crearemos un archivo `index.js`:
+
+```JavaScript
+import 'ol/ol.css';
+import {Map, View} from 'ol';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+
+const map = new Map({
+  target: 'map',
+  layers: [
+    new TileLayer({
+      source: new OSM()
+    })
+  ],
+  view: new View({
+    center: [0, 0],
+    zoom: 0
+  })
+});
+```
+
+y seguidamente un fichero `index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Using Parcel with OpenLayers</title>
+    <style>
+      html, body, #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="./index.js"></script>
+  </body>
+</html>
+```
+
+Ahora crearemos las tareas de creación del visor mediante el uso de la herramienta. Para ello añadimos en el archivo `package.json` que se habrá creado tras la ejecución del comando `npm init` lo siguiente:
+
+```JSON hl_lines="8 9"
+{
+  "name": "ol-googlemaps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build --public-url . index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ol": "^5.2.0",
+    "olgm": "^1.0.0-beta.4"
+  }
+}
+```
+
+si ahora ejecutamos `npm start` podremos ver el visor en [http://localhost:1234/](http://localhost:1234/)
+
+Añadiremos la capa de Google haciendo uso de la librería de Mapgears:
+
+```JavaScript hl_lines="4 5 6 8 10 15 23 24"
+import 'ol/ol.css';
+import 'olgm/olgm.css';
+import {Map, View} from 'ol';
+import GoogleLayer from 'olgm/layer/Google.js';
+import {defaults} from 'olgm/interaction.js';
+import OLGoogleMaps from 'olgm/OLGoogleMaps.js';
+
+var center = [0, 0];
+
+const googleLayer = new GoogleLayer();
+
+const map = new Map({
+  target: 'map',
+  layers: [
+    googleLayer
+  ],
+  view: new View({
+    center: [0, 0],
+    zoom: 0
+  })
+});
+
+var olGM = new OLGoogleMaps({map: map});
+olGM.activate();
+```
+
+Es posible que nos encontremos problemas a la hora de consumir los servicios de mapas de Google debido a las restricciones de uso de las Keys.
