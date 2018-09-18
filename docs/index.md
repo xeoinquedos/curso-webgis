@@ -29,7 +29,7 @@ El curso es eminentemente práctico por lo que se irán avanzando en los supuest
     1. ¿Qué es una capa vectorial?
     2. El formato GeoJSON
     3. Servicios WFS
-4. Y si mis datos son enormes
+4. Y si los datos son enormes
     1. WMS, WMS-T, TileLayers
 5. Interactuando con el mapa
     1. Consultando una capa al servidor
