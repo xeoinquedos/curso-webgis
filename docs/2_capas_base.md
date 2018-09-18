@@ -273,3 +273,175 @@ olGM.activate();
 ```
 
 Es posible que nos encontremos problemas a la hora de consumir los servicios de mapas de Google debido a las restricciones de uso de las Keys.
+
+## Mapbox
+Mapbox es un proveedor de mapas en línea personalizados para sitios web y aplicaciones como Foursquare, Lonely Planet, Facebook, el Financial Times, The Weather Channel y Snapchat. Desde 2010, ha ampliado rápidamente el nicho de mapas personalizados, como respuesta a la opción limitada que ofrecen los proveedores de mapas, como Google Maps. Mapbox es el creador, o un colaborador significativo de algunas bibliotecas y aplicaciones de mapeo de código abierto, incluida la especificación MBTiles, el IDE de cartografía TileMill, la biblioteca JavaScript Leaflet y el lenguaje y analizador de estilo de mapas CartoCSS.
+
+Vamos a ver como es posible usar los mapas de Mapbox con OL. Para ello, como ya es común en este tipo de servicios donde el modelo de negocio es proveer un servicio web, deberemos darnos de alta y obtener un token con el que acceder a sus servicios.
+
+!!! tip
+    Para obtener el token [https://www.mapbox.com/](https://www.mapbox.com/).
+    Durante el curso se podrá utilizar el token *pk.eyJ1IjoibWljaG9nYXIiLCJhIjoiY2ptN3UzNXJnMDhpcDNrbm9tczlibDMzbCJ9.zr2VPbydp2PhiAG5UxVn4w*
+
+Siguiendo con la dinámica, crearemos una carpeta `ol-mapbox` donde crearemos un archivo `ìndex.html` con el contenido necesario para empezar con un nuevo visor.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapbox y OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+      let map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        })
+      });
+    </script>
+  </body>
+</html>
+```
+
+Ahora añadiremos la capa de Mapbox, en este caso será la capa `mapbox/street-v1`.
+
+```html hl_lines="17 18 19 20 21 22 23"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapbox y OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+      let map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        }),
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.XYZ({
+              url: 'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWljaG9nYXIiLCJhIjoiY2ptN3UzNXJnMDhpcDNrbm9tczlibDMzbCJ9.zr2VPbydp2PhiAG5UxVn4w'
+            })
+          })
+        ]
+      });
+    </script>
+  </body>
+</html>
+```
+
+Mapbox nos ofrece la posibilidad de crear nuestros propios estilos y pone a disposición algunos. Siguiendo con el ejemplo de Bing, crearemos un selector que nos permita visualizar algunos de estos estilos. Primero crearemos una colección con los nombres de los estilos de los que disponemos en Mapbox y la lógica para crear cada capa. 
+
+```html hl_lines="11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 37"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapbox y OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+      let styles = [
+          'basic',
+          'streets',
+          'bright',
+          'light',
+          'dark',
+          'satellite'
+      ];
+      let layers = [];
+      let i, ii;
+      for (i = 0, ii = styles.length; i < ii; ++i) {
+          layers.push(new ol.layer.Tile({
+              visible: false,
+              preload: Infinity,
+              source: new ol.source.XYZ({
+                url: `https://api.mapbox.com/styles/v1/mapbox/${styles[i]}-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWljaG9nYXIiLCJhIjoiY2ptN3UzNXJnMDhpcDNrbm9tczlibDMzbCJ9.zr2VPbydp2PhiAG5UxVn4w`
+              })
+          })
+        )
+      }
+      let map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        }),
+        layers
+      });
+    </script>
+  </body>
+</html>
+```
+
+Ahora crearemos el selector de capas y la lógica que nos permita seleccionar la capa que deseamos ver.
+
+``` html hl_lines="32 33 34 35 45 46 47 48 49 50 51 52"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapbox y OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+    <select id="layer-select"></select>
+    <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+      const select = document.getElementById('layer-select')
+      let styles = [
+          'basic',
+          'streets',
+          'bright',
+          'light',
+          'dark',
+          'satellite'
+      ];
+      let layers = [];
+      let i, ii;
+      for (i = 0, ii = styles.length; i < ii; ++i) {
+        const url = `https://api.mapbox.com/styles/v1/mapbox/${styles[i]}-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWljaG9nYXIiLCJhIjoiY2ptN3UzNXJnMDhpcDNrbm9tczlibDMzbCJ9.zr2VPbydp2PhiAG5UxVn4w`
+          layers.push(new ol.layer.Tile({
+              visible: false,
+              preload: Infinity,
+              source: new ol.source.XYZ({
+                url
+              })
+          }));
+        const option = document.createElement('option');
+        const val = document.createTextNode(styles[i]);
+        option.appendChild(val);
+        select.appendChild(option);
+      }
+      let map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 2
+        }),
+        layers
+      });
+      const onChange = () => {
+          let style = select.value;
+          for (let i = 0, ii = layers.length; i < ii; ++i) {
+            layers[i].setVisible(styles[i] === style);
+          }
+      }
+      select.addEventListener('change', onChange);
+      onChange();
+    </script>
+  </body>
+</html>
+```
