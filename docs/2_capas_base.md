@@ -466,7 +466,7 @@ Para hacer esto, comenzaremos creando una carpeta `ol-pnoa` con nuestro esquelé
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mapbox y OpenLayers</title>
+    <title>PNOA y OpenLayers</title>
     <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
   </head>
   <body>
