@@ -27,8 +27,8 @@ El curso es eminentemente práctico por lo que se irán avanzando en los supuest
     2. Capas bases locales, PNOA.
 3. Mas allá de la capa base, añadiendo mis propios datos
     1. ¿Qué es una capa vectorial?
-    2. GML, GeoJSON y el servicio WFS
-    3. Los malditos sistemas de coordenadas
+    2. El formato GeoJSON
+    3. Servicios WFS
 4. Y si mis datos son enormes
     1. WMS, WMS-T, TileLayers
 5. Interactuando con el mapa
