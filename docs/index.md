@@ -30,7 +30,7 @@ El curso es eminentemente práctico por lo que se irán avanzando en los supuest
     2. El formato GeoJSON
     3. Servicios WFS
 4. Y si los datos son enormes
-    1. WMS, WMS-T, TileLayers
+    1. WMS, WMS-T, XYZ
 5. Interactuando con el mapa
     1. Consultando una capa al servidor
     2. Consultando una capa en el cliente
