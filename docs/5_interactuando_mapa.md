@@ -967,3 +967,157 @@ La fuente de tipo `ol.source.ImageWMS` tiene un método que nos permite construi
     </DCPType>
 </GetFeatureInfo>
 ```
+
+!!! tip
+    Si disponemos del formato de salida en `application/json` obtendremos los datos en `geojson` lo que nos permitiría representarlos en el mapa como vimos en ejemplos anteriores.
+
+## Interactuando en el cliente
+
+Siguiendo en la linea de interaccionar con los datos, en el ejemplo anterior vimos como obtener datos de un servidor. Como ya hemos comentado en otras secciones del curso, hay casos en los que el volumen de datos nos permite descargar estos en el cliente mediante una petición. Por ejemplo usando el servicio *WFS* del que ya hemos hablado. 
+
+Creamos de nuevo una carpeta `ol-dataclient` y creamos nuestro archivo `index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactuando en el cliente</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+      const PNOA = new ol.layer.Image({
+        source: new ol.source.ImageWMS({
+          url: 'http://www.ign.es/wms-inspire/pnoa-ma?',
+          params: {'LAYERS': 'OI.OrthoimageCoverage'},
+        })
+      })
+      const vectorSource = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: function(extent) {
+          return 'https://cors-anywhere.herokuapp.com/http://ideadif.adif.es/gservices/Tramificacion/wfs?service=WFS&version=1.1.0&' + 
+		    'request=GetFeature&typename=Tramificacion:TramosFueraServicio&outputFormat=application/json&srsname=EPSG:3857&';
+        },
+        strategy: ol.loadingstrategy.all
+      });
+      const tramos = new ol.layer.Vector({
+        source: vectorSource,
+        style: new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'red',
+            width: 2
+          })
+        })
+      });
+      let map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-3.6832130, 40.2589448]),
+          zoom: 6
+        }),
+      layers: [
+        PNOA,
+	    tramos
+      ]
+      });
+    </script>
+  </body>
+</html>
+```
+
+Lo que tendremos es el resultado del ejercicio del WFS que utilizaremos como base para explorar las consultas en el cliente. Tras la carga de del servicio WFS (revisar la pestaña *Network* ya que esta consulta puede tardar bastante dependiendo de la velocidad de la red) tendremos todas las geometrías descargadas en nuestro cliente. Si abrimos la pestaña *Network* y movemos el mapa, veremos que ya no se hacen peticiones al servicio WFS (`wfs?service=WFS&...`) ya que disponemos de todos los datos en el cliente.
+
+![No peticiones WFS](_images/no_wfs.gif)
+
+Ahora la interacción desde el cliente con los datos del cliente será inmediata. Deberemos usar los objetos `ol.interaction.Select` que nos permitirán añadir esa interacción al mapa. 
+
+```html hl_lines="9 10 11 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 71 72 73 74 75 76 77 78 79 80 81"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactuando en el cliente</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div id="div-data-features">
+	    <table id="data-features"></table>
+    </div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+        // Utilidad para crear una tabla
+        const createTableFromFeature = feature => {
+            const div = document.getElementById('div-data-features');
+            let table = document.getElementById('data-features');
+            if (table) {
+                div.removeChild(table)
+                table = document.createElement('table');
+                table.id = 'data-features';
+                div.appendChild(table);
+            }
+            const properties = feature.getProperties()
+            Object.keys(properties).forEach(key => {
+                if (properties[key]) {
+                    const row = table.insertRow(0);
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    cell1.innerHTML = key;
+                    cell2.innerHTML = properties[key];
+                }
+            })
+        }
+        //
+        const PNOA = new ol.layer.Image({
+            source: new ol.source.ImageWMS({
+            url: 'http://www.ign.es/wms-inspire/pnoa-ma?',
+            params: {'LAYERS': 'OI.OrthoimageCoverage'},
+            })
+        })
+        const vectorSource = new ol.source.Vector({
+            format: new ol.format.GeoJSON(),
+            url: function(extent) {
+            return 'https://cors-anywhere.herokuapp.com/http://ideadif.adif.es/gservices/Tramificacion/wfs?service=WFS&version=1.1.0&' + 
+                'request=GetFeature&typename=Tramificacion:TramosFueraServicio&outputFormat=application/json&srsname=EPSG:3857&';
+            },
+            strategy: ol.loadingstrategy.all
+        });
+        const tramos = new ol.layer.Vector({
+            source: vectorSource,
+            style: new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+            })
+        });
+        let map = new ol.Map({
+            target: 'map',
+            view: new ol.View({
+            center: ol.proj.fromLonLat([-3.6832130, 40.2589448]),
+            zoom: 6
+            }),
+            layers: [
+                PNOA,
+                tramos
+            ]
+        });
+
+      	// Añadimos interacción
+        const selectSingleClick = new ol.interaction.Select({
+            hitTolerance: 5
+        });
+        map.addInteraction(selectSingleClick);
+            selectSingleClick.on('select', (e) => {
+                e.selected.forEach(feature => {
+                    createTableFromFeature(feature);
+                })
+        });
+	    //
+    </script>
+  </body>
+</html>
+```
+
+En la parte de la interacción es donde conectamos el evento del `singleclick` con el mapa. De esta manera, pulsando sobre el mismo, nos devolverá los elementos sobre los que hayamos pulsado a la vez que los selecciona. Al contrario que en el ejemplo anterior, no se está realizando ninguna consulta a un servidor externo una vez que se han descargado todos los datos. Y las interacciones se realizan dentro del cliente.
