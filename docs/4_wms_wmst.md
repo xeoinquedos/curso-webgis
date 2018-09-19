@@ -148,7 +148,7 @@ Para resolver este tema se creó el concepto de `Tile` o `Tesela` en castellano,
 
 Hay varios estándares que trabajan de esta manera, TMS, WMS-T o el estandar de facto XYZ. A continuación veremos algunos de ellos.
 
-## WMTS (para nota)
+## WMTS
 Tal vez los conceptos del WMTS sean complejos y se escapan al objetivo de este curso, así que simplemente daremos unas recetas de como implementar estos servicios. 
 
 Lo primero crear una carpeta `ol-wmts` con un archivo `index.html`
@@ -186,6 +186,53 @@ La clase `ol.source.WMTS`  acepta una serie de propiedades para controlar los pa
 * style: el estilo que se usará (debe estar en el servidor).
 * matrixSet: el nombre de la matriz que usaremos. En nuestro caso `EPSG:4326`.
 * tileGrid: especifica la malla de teselas que se utilizará. Debe ser una instancia de `ol.tilegrid.WMTS`. En el que se indicará la proyección, resolución y matriz.
+
+Estos datos, como hemos hecho hasta ahora, los obtendremos de las capacidades del servicio que podemos ver en [http://www.ign.es/wmts/mapa-raster?request=GetCapabilities&service=WMTS](http://www.ign.es/wmts/mapa-raster?request=GetCapabilities&service=WMTS)
+
+```XML hl_lines="10 22"
+<Layer>
+<ows:Title>Cartografía del IGN</ows:Title>
+<ows:Abstract>
+Capa de cartografía raster del IGN. Datos mostrados en función de la escala de visualización: - Mapa 2M: hasta 305m/px. - Mapa 1M: hasta 152 m/px. - Mapa 500: hasta 50 m/px. - Mapa 200: hasta 20 m/px. - MTN50: hasta 5 m/px. - MTN25: desde 5 m/px
+</ows:Abstract>
+<ows:WGS84BoundingBox>
+<ows:LowerCorner>-18.162 21.899</ows:LowerCorner>
+<ows:UpperCorner>6.289 45.286</ows:UpperCorner>
+</ows:WGS84BoundingBox>
+<ows:Identifier>MTN</ows:Identifier>
+<ows:Metadata xlink:href="http://www.ign.es/csw-inspire/srv/spa/csw?SERVICE=CSW&VERSION=2.0.2&REQUEST=GetRecordById&outputSchema=http://www.isotc211.org/2005/gmd&ElementSetName=full&ID=spaigncapawmtswmscmaparaster20130531"/>
+<Style isDefault="true">
+<ows:Identifier>default</ows:Identifier>
+<ows:LegendURL width="1295" height="346" format="image/png" xlink:href="http://www.ign.es/wms-inspire/mapa-raster/leyendas/mtn25.png"/>
+</Style>
+<Format>image/jpeg</Format>
+<Format>image/png</Format>
+<TileMatrixSetLink>
+<TileMatrixSet>InspireCRS84Quad</TileMatrixSet>
+</TileMatrixSetLink>
+<TileMatrixSetLink>
+<TileMatrixSet>EPSG:4326</TileMatrixSet>
+</TileMatrixSetLink>
+<TileMatrixSetLink>
+<TileMatrixSet>EPSG:4258</TileMatrixSet>
+</TileMatrixSetLink>
+<TileMatrixSetLink>
+<TileMatrixSet>EPSG:32630</TileMatrixSet>
+</TileMatrixSetLink>
+<TileMatrixSetLink>
+<TileMatrixSet>EPSG:25830</TileMatrixSet>
+</TileMatrixSetLink>
+<TileMatrixSetLink>
+<TileMatrixSet>EPSG:32628</TileMatrixSet>
+</TileMatrixSetLink>
+<TileMatrixSetLink>
+<TileMatrixSet>EPSG:25828</TileMatrixSet>
+</TileMatrixSetLink>
+<TileMatrixSetLink>
+<TileMatrixSet>GoogleMapsCompatible</TileMatrixSet>
+</TileMatrixSetLink>
+</Layer>
+```
 
 Aquí vemos el código necesario para mostrar una capa teselada del IGN en WGS84 utilizando una fuente WMTS:
 
@@ -252,3 +299,4 @@ Si ahora revisamos la pestaña *Network* del navegador, comprobaremos que la car
 [http://www.ign.es/wmts/mapa-raster?layer=MTN&style=normal&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fjpeg&TileMatrix=EPSG%3A4326%3A9&TileCol=511&TileRow=144](http://www.ign.es/wmts/mapa-raster?layer=MTN&style=normal&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fjpeg&TileMatrix=EPSG%3A4326%3A9&TileCol=511&TileRow=144)
 
 ![Tesela image](_images/tesela.image)
+
