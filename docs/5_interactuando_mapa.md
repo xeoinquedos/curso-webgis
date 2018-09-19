@@ -628,9 +628,9 @@ Para instalar el control, necesitaremos un sitio donde visualizar las coordenada
 </html>
 ```
 
-Después configuraremos el control y lo aádiremos al mapa
+Después configuraremos el control y lo añadiremos al mapa
 
-```html hl_lines="10"
+```html hl_lines="73 74 75 76 77 78 79 80 81 94"
 <!DOCTYPE html>
 <html>
   <head>
@@ -736,3 +736,5 @@ Después configuraremos el control y lo aádiremos al mapa
   </body>
 </html>
 ```
+
+## Interaccionando con el servidor
