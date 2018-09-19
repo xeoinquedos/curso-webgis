@@ -737,4 +737,233 @@ Después configuraremos el control y lo añadiremos al mapa
 </html>
 ```
 
-## Interaccionando con el servidor
+## Interactuando con el servidor
+Como ya hemos comentado, la mayoría de los servicios que estamos visualizando se encuentran en servidores desde los que nosotros consumimos sus datos a través de los diferentes servicios definidos para ello. Uno de los servicios con los que podemos interactuar será el servicio WMS. Este servicio nos permite realizar consultas sobre un punto determinado del mapa. Este tipo de consultas vienen definidas en el estandar como [`GetFeatureInfo`](http://docs.geoserver.org/stable/en/user/services/wms/reference.html#getfeatureinfo). 
+
+Esta consulta es una de las más utilizadas para obtener información desde los servidores, y dentro de las librerías de mapas ya existen implementaciones de la petición que nos permiten configurar consultas desde el mapa.
+
+Para empezar, crearemos una carpeta `ol-getfeatureinfo` con nuestro `index.html`.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactuando con el servidor con OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+        const toner = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'toner'
+            })
+        })
+        const map = new ol.Map({
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.fromLonLat([-8.8120584, 42.2154941]),
+                zoom: 12
+            }),
+            layers: [
+                toner
+            ]
+        });
+    </script>
+  </body>
+</html>
+```
+
+Ahora configuraremos una capa WMS sobre la que haremos las consultas, por ejemplo la capa de [rios](http://wms.mapama.es/sig/Agua/RedHidrograficaMDT/wms.aspx?service=wms&version=1.3.0&request=GetCapabilities) del Ministerio de Medio Ambiente. Si recordamos de los ejercicios anteriores, necesitaremos la URL base del servicio `http://wms.mapama.es/sig/Agua/RedHidrograficaMDT/wms.aspx?` y el nombre de la capa que obteníamos del archivo de capabilities.
+
+```XML hl_lines="1 2"
+<Layer queryable="1">
+<Name>HY.PhysicalWaters.Waterbodies</Name>
+<Title>Red hidrográfica básica MDT 100x100</Title>
+<Abstract>
+Servicio Web de Mapas conforme al perfil INSPIRE de ISO19128-WMS 1.3.0 que permite acceder a conjunto de datos de la Red hidrográfica generada a partir del MDT de celda 100 x 100 (CEDEX). Generado por la Subdirección General de Infraestructuras y Tecnología (Ministerio de Agricultura y Pesca, Alimentación y Medio Ambiente).
+</Abstract>
+<KeywordList>
+<Keyword>HY.PhysicalWaters.Waterbodies</Keyword>
+</KeywordList>
+<BoundingBox CRS="CRS:84" minx="-22.729594" miny="25.912170" maxx="5.836872" maxy="45.945160"/>
+<BoundingBox CRS="EPSG:4230" minx="26.275447" miny="-18.409876" maxx="44.85536" maxy="5.22598"/>
+<BoundingBox CRS="EPSG:4326" minx="26.275447" miny="-18.409876" maxx="44.85536" maxy="5.22598"/>
+<BoundingBox CRS="EPSG:4258" minx="26.275447" miny="-18.409876" maxx="44.85536" maxy="5.22598"/>
+<BoundingBox CRS="EPSG:32627" minx="770000" miny="3000000" maxx="2700000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:32628" minx="180000" miny="3000000" maxx="2170000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:23029" minx="-410000" miny="3000000" maxx="1650000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:23030" minx="-1050000" miny="3000000" maxx="1150000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:23031" minx="-1615000" miny="3000000" maxx="620000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:32629" minx="-410000" miny="3000000" maxx="1650000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:32630" minx="-1050000" miny="3000000" maxx="1150000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:32631" minx="-1615000" miny="3000000" maxx="620000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:25829" minx="-410000" miny="3000000" maxx="1650000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:25830" minx="-1050000" miny="3000000" maxx="1150000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:25831" minx="-1615000" miny="3000000" maxx="620000" maxy="5000000"/>
+<BoundingBox CRS="EPSG:3857" minx="-2100000" miny="3000000" maxx="500000" maxy="5600000"/>
+<Attribution>
+<Title>
+Ministerio de Agricultura y Pesca, Alimentación y Medio Ambiente (MAPAMA)
+</Title>
+<OnlineResource xlink:type="simple" xlink:href="https://www.mapama.gob.es"/>
+</Attribution>
+<Identifier authority="MAPAMA">ESMAGRAMADGARIOS0007</Identifier>
+<MetadataURL type="ISO19139:2005">
+<Format>text/xml</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.mapama.gob.es/ide/metadatos/srv/spa/csw?SERVICE=CSW&VERSION=2.0.2&REQUEST=GetRecordById&outputSchema=http://www.isotc211.org/2005/gmd&ElementSetName=full&ID=8bcffce8-9c9c-4d1e-9a3e-b83e175bbd27"/>
+</MetadataURL>
+<Style>
+<Name>default</Name>
+<Title>
+Estilo Ministerio Red hidrográfica básica MDT 100x100
+</Title>
+<Abstract>
+Estilo de representación MAPAMA de Red hidrográfica básica MDT 100x100
+</Abstract>
+<LegendURL width="268" height="32">
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.mapama.gob.es/sig/Agua/RedHidrograficaMDT/Leyenda/RedHidrograficaBasica.png" xlink:type="simple"/>
+</LegendURL>
+</Style>
+<Style>
+<Name>HY.PhysicalWaters.Waterbodies.Default.Polyline</Name>
+<Title>Water bodies default style</Title>
+<Abstract>
+Estilo de representación INSPIRE: Physical waters as watercourses or standing water can be portrayed with different geometries depending on its dimensions and the level of detail or resolution. Lineal watercourses are depicted by solid blue (#33CCFF) lines with stroke width of 1 pixel and the superficial ones are depicted by filled blue light polygons (#CCFFFF) without border. Punctual standing waters are depicted by dark blue (#0066FF) circles with size of 6 pixel and the superficial ones are depicted by filled blue light polygons (#CCFFFF) without border.
+</Abstract>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.mapama.gob.es/sig/Agua/RedHidrograficaMDT/wms.aspx?VERSION=1.1.0&REQUEST=GetLegendGraphic&LAYER=HY.PhysicalWaters.Waterbodies&STYLE=HY.PhysicalWaters.Waterbodies.Default.Polyline&FORMAT=image/png" xlink:type="simple"/>
+</LegendURL>
+<StyleSheetURL>
+<Format>text/xml</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.mapama.gob.es/sig/Agua/RedHidrograficaMDT/wms.aspx?request=GetStyles&layers=HY.PhysicalWaters.Waterbodies&version=1.3.0" xlink:type="simple"/>
+</StyleSheetURL>
+</Style>
+</Layer>
+```
+Otro parámetro importante a tener en cuenta es el valor de `queryable` que aparece en la capa. Un valor 1 (`true`) significa que la capa es consultable mientras que un valor 0 (`false`) indica que no lo es.
+
+Configuraremos la capa
+
+```html hl_lines="16 17 18 19 20 21 22 23 24 25 26 27 33"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactuando con el servidor con OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+        const toner = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'toner'
+            })
+        })
+        const source = new ol.source.ImageWMS({
+          url: 'http://wms.mapama.es/sig/Agua/RedHidrograficaMDT/wms.aspx?',
+          params: {'LAYERS': 'HY.PhysicalWaters.Waterbodies'}
+        })
+        const rios = new ol.layer.Image({
+            source
+        })
+        const view = new ol.View({
+            center: [-8.8120584, 42.2154941],
+            zoom: 12,
+            projection: 'EPSG:4326'
+            })
+        const map = new ol.Map({
+            target: 'map',
+            view ,
+            layers: [
+                toner,
+                rios
+            ]
+        });
+    </script>
+  </body>
+</html>
+```
+
+Ahora configuraremos el control que nos permite hacer las consultas. Lo que haremos será obtener una url que nos permitirá consultar al servicio los datos de donde estemos pinchando.
+
+```html hl_lines="9 38 39 40 41 42 43 44 45 46 47"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactuando con el servidor con OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div id="info" style="width: 100%"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+        const toner = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'toner'
+            })
+        })
+        const source = new ol.source.ImageWMS({
+          url: 'http://wms.mapama.es/sig/Agua/RedHidrograficaMDT/wms.aspx?',
+          params: {'LAYERS': 'HY.PhysicalWaters.Waterbodies'}
+        })
+        const rios = new ol.layer.Image({
+            source
+        })
+        const view = new ol.View({
+            center: [-8.8120584, 42.2154941],
+            zoom: 12,
+            projection: 'EPSG:4326'
+            })
+        const map = new ol.Map({
+            target: 'map',
+            view ,
+            layers: [
+                toner,
+                rios
+            ]
+        });
+
+        map.on('singleclick', function(evt) {
+            const viewResolution = view.getResolution();
+            const url = source.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:4326',
+            {'INFO_FORMAT': 'text/html'});
+            if (url) {
+         	document.getElementById('info').innerHTML =
+              	'<iframe seamless src="' + url + '" style="width: 100%; height: 300px"></iframe>';
+            }
+        });
+    </script>
+  </body>
+</html>
+```
+
+Lo primero a tener en cuenta es `map.on()`. Lo que hacemos aquí es engancharle una función al [evento `singleclick`](http://openlayers.org/en/latest/apidoc/module-ol_MapBrowserEvent-MapBrowserEvent.html#event:singleclick) del mapa. De esta manera, cuando pinchemos sobre el mapa, se lanzará este evento con un parámetro `evt` donde tendremos las coordenadas del punto donde hemos pinchado en el mapa. Existen variedad de eventos en el mapa sobre los que podemos interacctuar simplemente conectándonos a ellos de la misma manera
+
+```javascript
+map.on('tipo_de_evento', callback)
+```
+
+La fuente de tipo `ol.source.ImageWMS` tiene un método que nos permite construir una url donde podremos consultar el dato que necesitamos. Los parámetros que necesita el método se consiguen desde la vista y el evento. Un parámetro importante a tener en cuenta es el `INFO_FORMAT`. Como en otros protocolos, deberemos ver en las [capacidades](http://wms.mapama.es/sig/Agua/RedHidrograficaMDT/wms.aspx?service=wms&version=1.3.0&request=GetCapabilities) del servicio, los formatos de respuesta que tenemos disponibles. Con este parámetro le indicamos en que formato queremos que nos devuelva los datos.
+
+```XML hl_lines="2 3 4 5"
+<GetFeatureInfo>
+    <Format>application/vnd.ogc.wms_xml</Format>
+    <Format>text/xml</Format>
+    <Format>text/html</Format>
+    <Format>text/plain</Format>
+    <DCPType>
+        <HTTP>
+            <Get>
+                <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://wms.mapama.gob.es/sig/Agua/RedHidrograficaMDT/wms.aspx?"/>
+            </Get>
+        </HTTP>
+    </DCPType>
+</GetFeatureInfo>
+```
