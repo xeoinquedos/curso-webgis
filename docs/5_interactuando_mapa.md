@@ -420,3 +420,319 @@ Ahora tendremos las capas configuradas en el control de capas, pero necesitaremo
   </body>
 </html>
 ```
+
+## Algunos controles sencillos más
+
+Dentro de la librería disponemos de algunos controles sencillos de instalar. Estos serán por ejemplo el control de vista de pájaro, o el de posición de ratón. A continuación configuraremos ambos.
+
+### Vista de pájaro
+
+Sobre el ejemplo anterior del control de capas, añadiremos el control de Vista de pájaro. Este viene en la librería OpenLayers como `ol.control.OverviewMap`. Para instalar nuevos controles, deberemos insertarlos en una propiedad del mapa denominada `controls`
+
+```html hl_lines="82 83 84"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control de Capas en OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@3.0.0/src/ol-layerswitcher.css" />
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.0.0"></script>
+    <script>
+        // Nuevas capas
+        const watercolor = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'watercolor'
+            })
+        })
+        const labels = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'terrain-labels'
+            })
+        })
+        const waterWithLabels = new ol.layer.Group({
+            title: "Watercolor con etiquetas",
+                    type: 'base',
+                    combine: true,
+                    visible: false,
+            layers: [
+                watercolor, 
+                labels
+            ]
+        })
+        const watercolorHidden = new ol.layer.Tile({
+            title: 'Water color',
+            type: 'base',
+            visible: false,
+            source: new ol.source.Stamen({
+                layer: 'watercolor'
+            })
+        })
+        const osm = new ol.layer.Tile({
+            title: 'OSM',
+            type: 'base',
+            visible: true,
+            source: new ol.source.OSM()
+        })
+        const carreteras = new ol.layer.Image({
+            title: "Carreteras",
+            source: new ol.source.ImageWMS({
+                url: 'http://www.ign.es/wms-inspire/ign-base?',
+                params: {'LAYERS': 'IGNBaseOrto'},
+            })
+        })
+        //
+        // Grupos del arbol
+        const baseLayers = new ol.layer.Group({
+            'title': 'Base maps',
+            layers: [
+                waterWithLabels,
+                watercolorHidden,
+                osm
+            ]
+        })
+        const overlays = new ol.layer.Group({
+                title: 'Overlays',
+                layers: [
+                    carreteras
+                ]
+	    })
+        //
+        let map = new ol.Map({
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.fromLonLat([-8.8120584, 42.2154941]),
+                zoom: 11
+            }),
+            layers: [
+                baseLayers,
+                overlays
+            ],
+            controls: ol.control.defaults().extend([
+                new ol.control.OverviewMap()
+            ])
+        });
+
+        const layerSwitcher = new ol.control.LayerSwitcher({
+            tipLabel: 'Arbol de Capas'
+        });
+        map.addControl(layerSwitcher);
+    </script>
+  </body>
+</html>
+```
+
+### Posición del ratón
+
+El control de posición del ratón nos permite obtener las coordenadas de la posición del ratón. Como el control anterior, se trata de un control que viene con la librería, en el objeto `ol.control.MousePosition`.
+
+Para instalar el control, necesitaremos un sitio donde visualizar las coordenadas, así que lo primero crearemos esto.
+
+```html hl_lines="10"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control de Capas en OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@3.0.0/src/ol-layerswitcher.css" />
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div id="mouse-position"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.0.0"></script>
+    <script>
+        // Nuevas capas
+        const watercolor = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'watercolor'
+            })
+        })
+        const labels = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'terrain-labels'
+            })
+        })
+        const waterWithLabels = new ol.layer.Group({
+            title: "Watercolor con etiquetas",
+                    type: 'base',
+                    combine: true,
+                    visible: false,
+            layers: [
+                watercolor, 
+                labels
+            ]
+        })
+        const watercolorHidden = new ol.layer.Tile({
+            title: 'Water color',
+            type: 'base',
+            visible: false,
+            source: new ol.source.Stamen({
+                layer: 'watercolor'
+            })
+        })
+        const osm = new ol.layer.Tile({
+            title: 'OSM',
+            type: 'base',
+            visible: true,
+            source: new ol.source.OSM()
+        })
+        const carreteras = new ol.layer.Image({
+            title: "Carreteras",
+            source: new ol.source.ImageWMS({
+                url: 'http://www.ign.es/wms-inspire/ign-base?',
+                params: {'LAYERS': 'IGNBaseOrto'},
+            })
+        })
+        //
+        // Grupos del arbol
+        const baseLayers = new ol.layer.Group({
+            'title': 'Base maps',
+            layers: [
+                waterWithLabels,
+                watercolorHidden,
+                osm
+            ]
+        })
+        const overlays = new ol.layer.Group({
+                title: 'Overlays',
+                layers: [
+                    carreteras
+                ]
+	    })
+        //
+        let map = new ol.Map({
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.fromLonLat([-8.8120584, 42.2154941]),
+                zoom: 11
+            }),
+            layers: [
+                baseLayers,
+                overlays
+            ],
+            controls: ol.control.defaults().extend([
+                new ol.control.OverviewMap()
+            ])
+        });
+
+        const layerSwitcher = new ol.control.LayerSwitcher({
+            tipLabel: 'Arbol de Capas'
+        });
+        map.addControl(layerSwitcher);
+    </script>
+  </body>
+</html>
+```
+
+Después configuraremos el control y lo aádiremos al mapa
+
+```html hl_lines="10"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control de Capas en OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@3.0.0/src/ol-layerswitcher.css" />
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div id="mouse-position"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.0.0"></script>
+    <script>
+        // Nuevas capas
+        const watercolor = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'watercolor'
+            })
+        })
+        const labels = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+                layer: 'terrain-labels'
+            })
+        })
+        const waterWithLabels = new ol.layer.Group({
+            title: "Watercolor con etiquetas",
+                    type: 'base',
+                    combine: true,
+                    visible: false,
+            layers: [
+                watercolor, 
+                labels
+            ]
+        })
+        const watercolorHidden = new ol.layer.Tile({
+            title: 'Water color',
+            type: 'base',
+            visible: false,
+            source: new ol.source.Stamen({
+                layer: 'watercolor'
+            })
+        })
+        const osm = new ol.layer.Tile({
+            title: 'OSM',
+            type: 'base',
+            visible: true,
+            source: new ol.source.OSM()
+        })
+        const carreteras = new ol.layer.Image({
+            title: "Carreteras",
+            source: new ol.source.ImageWMS({
+                url: 'http://www.ign.es/wms-inspire/ign-base?',
+                params: {'LAYERS': 'IGNBaseOrto'},
+            })
+        })
+        //
+        // Grupos del arbol
+        const baseLayers = new ol.layer.Group({
+            'title': 'Base maps',
+            layers: [
+                waterWithLabels,
+                watercolorHidden,
+                osm
+            ]
+        })
+        const overlays = new ol.layer.Group({
+                title: 'Overlays',
+                layers: [
+                    carreteras
+                ]
+	    })
+        //
+        // Control MousePosition
+        const mousePositionControl = new ol.control.MousePosition({
+            coordinateFormat: ol.coordinate.createStringXY(4),
+            projection: 'EPSG:4326',
+            className: 'custom-mouse-position',
+            target: document.getElementById('mouse-position'),
+            undefinedHTML: '&nbsp;'
+        });
+        //
+        let map = new ol.Map({
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.fromLonLat([-8.8120584, 42.2154941]),
+                zoom: 11
+            }),
+            layers: [
+                baseLayers,
+                overlays
+            ],
+            controls: ol.control.defaults().extend([
+                new ol.control.OverviewMap(),
+                mousePositionControl
+            ])
+        });
+
+        const layerSwitcher = new ol.control.LayerSwitcher({
+            tipLabel: 'Arbol de Capas'
+        });
+        map.addControl(layerSwitcher);
+    </script>
+  </body>
+</html>
+```
