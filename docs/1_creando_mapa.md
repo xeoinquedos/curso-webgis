@@ -198,3 +198,5 @@ Tendremos algo así
 
 ![Primer visor](_images/pimer_mapa.png)
 *Fig 1. primer visor*
+
+[Probar con Leaflet](./../leaflet/1_creando_mapa)

@@ -389,3 +389,5 @@ El objeto que nuevo utilizaremos para configurar este tipo de servicios será la
   </body>
 </html>
 ```
+
+[Probar con Leaflet](./../leaflet/4_wms_wmts)

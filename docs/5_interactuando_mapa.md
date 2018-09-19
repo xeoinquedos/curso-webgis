@@ -1121,3 +1121,5 @@ Ahora la interacción desde el cliente con los datos del cliente será inmediata
 ```
 
 En la parte de la interacción es donde conectamos el evento del `singleclick` con el mapa. De esta manera, pulsando sobre el mismo, nos devolverá los elementos sobre los que hayamos pulsado a la vez que los selecciona. Al contrario que en el ejemplo anterior, no se está realizando ninguna consulta a un servidor externo una vez que se han descargado todos los datos. Y las interacciones se realizan dentro del cliente.
+
+[Probar con Leaflet](./../leaflet/5_interactuando_mapa)

@@ -11,5 +11,5 @@ nav:
   - 1. Creando un mapa: 1_creando_mapa.md
   - 2. El mapa sin datos. Añadir una capa base: 2_capas_base.md
   - 3. Mas allá de la capa base, añadiendo mis propios datos: 3_mis_datos.md
-  - 4. Y si los datos son enormes: 4_wms_wmst.md
+  - 4. Y si los datos son enormes: 4_wms_wmts.md
   - 5. Interactuando con el mapa: 5_interactuando_mapa.md

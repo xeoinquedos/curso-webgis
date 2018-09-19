@@ -515,3 +515,5 @@ A resaltar varias cosas. La url del servicio tiene un añadido `https://cors-any
 Ahora la url se trata de una función en vez de una cadena de texto. Esto tiene que ver con la opción `strategy`, ya que lo que consigue el cliente es ir haciendo peticiones limitadas por un contorno en vez de hacer una petición con todas las geometrías del servicio.
 
 Existen parámetros para limitar el número de objetos que queremos descargar del servicio WFS. Estos pueden ser `maxFeatures` o `count` el cual le indica un máximo de objetos a descargar y existe también la posibilidad de hacer filtros para obtener solo las features que nos interesan. Esto para un curso avanzado...
+
+[Probar con Leaflet](./../leaflet/3_mis_datos)

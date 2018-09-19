@@ -9,7 +9,7 @@ Para un correcto seguimiento del curso el alumno deberá tener conocimientos de:
 
 Será necesario tener instalado en el equipo:
 
-* [npm Linux](https://nodejs.org/en/download/package-manager/) [npm Windows](https://nodejs.org/en/download/)
+* [npm Linux](https://nodejs.org/en/download/package-manager/) o [npm Windows](https://nodejs.org/en/download/)
 * [reload](https://www.npmjs.com/package/reload) o cualquier otro servidor web (Apache, nginx...) con el que el alumno se sienta cómodo
 
 ## Objetivo

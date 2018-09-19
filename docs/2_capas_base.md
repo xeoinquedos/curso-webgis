@@ -699,3 +699,5 @@ problema solucionado. Pero OpenLayers nos ofrece herramientas para poder realiza
   </body>
 </html>
 ```
+
+[Probar con Leaflet](./../leaflet/2_capas_base)
