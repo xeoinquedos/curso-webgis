@@ -10,11 +10,10 @@ La documentación del curso está hecha con [mkdocs](https://www.mkdocs.org/)
 Para instalar `mkdocs` se recomienda usar un [`virtualenv`](https://virtualenvwrapper.readthedocs.io/en/latest/)
 
 ```
-$ workon mkdocs
-$ pip install mkdocs
 $ git clone git@github.com:michogar/curso-webgis.git
-$ cd curso-webgis
-$ mkdir serve
+$ workon mkdocs
+$ pip install -r requirements.txt
+$ mkdocs serve
 
 INFO    -  Building documentation... 
 INFO    -  Cleaning site directory 
