@@ -300,3 +300,92 @@ Si ahora revisamos la pestaña *Network* del navegador, comprobaremos que la car
 
 ![Tesela image](_images/tesela.image)
 
+## XYZ
+El estandar de facto [XYZ](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames) se trata de una convención que "naming" para la publicación de información geográfica desde una estructura de directorios. 
+
+Así, se deberá cumplir las siguientes especificaciones para que se trate de este tipo de servicio
+
+* Las `teselas` que se sirvan deberán tener un tamaño de 256 x 256 pixels y en formato PNG
+* Cada nivel de zoom será un directorio, cada columna es un subdirectorio y cada tesela es un archivo dentro de ese directorio.
+* La URL a cada archivo será de la forma `zoom/x/y.png`
+
+Lo que se define es como tiene que ser la estructura de las carpetas que podremos servir directamente desde un servidor HTTP común. El inconveniente de este tipo de servicios es que necesitan de una gran capacidad de almacenamiento. Como podemos ver en la imagen a continuación, el número de archivos va creciendo según aumentamos el nivel de zoom.
+
+![Zoom Levels](_images/zoom_levels.png)
+Relación entre el número de archivos por nivel de zoom. Fuente: [Zoom Levels. Wiki OpenStreetMap](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Zoom_levels)
+
+Este tipo de servicios son utilizados de manera intensiva por la Comunidad de OpenStreetMap, y en su [Wiki](https://wiki.openstreetmap.org/wiki/Tile_servers) podremos encontrar varios de estos servicios que están a nuestra disposición.
+
+Para configurar un servicio XYZ con OpenLayers, lo primero será crear la carpeta `ol-xyz` y añadiremos nuestra plantilla `index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XYZ y OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+      const PNOA = new ol.layer.Image({
+        source: new ol.source.ImageWMS({
+          url: 'http://www.ign.es/wms-inspire/pnoa-ma?',
+          params: {'LAYERS': 'OI.OrthoimageCoverage'},
+        })
+      })
+      let map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-8.8120584, 42.2154941]),
+          zoom: 11
+        }),
+      layers: [
+        PNOA
+      ]
+      });
+    </script>
+  </body>
+</html>
+```
+
+El objeto que nuevo utilizaremos para configurar este tipo de servicios será la fuente `ol.source.XYZ` junto con la ya conocida `ol.layer.Tile`. Simplemente necesitaremos la URL del servicio. Para nuestro caso, utilizaremos los datos de OpenSeaMap, cuya URL del servicio será [http://tiles.openseamap.org/seamark/${z}/${x}/${y}.png](http://tiles.openseamap.org/seamark/${z}/${x}/${y}.png)
+
+```html hl_lines="17 18 19 20 21 30"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XYZ y OpenLayers</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.2.0/css/ol.css" type="text/css">
+  </head>
+  <body>
+     <div id="map" class="map"></div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <script>
+      const PNOA = new ol.layer.Image({
+        source: new ol.source.ImageWMS({
+          url: 'http://www.ign.es/wms-inspire/pnoa-ma?',
+          params: {'LAYERS': 'OI.OrthoimageCoverage'},
+        })
+      })
+      const seaMap = new ol.layer.Tile({
+            source: new ol.source.XYZ({
+              url: 'http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'
+            })
+          })
+      let map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-8.8120584, 42.2154941]),
+          zoom: 11
+        }),
+      layers: [
+        PNOA,
+        seaMap
+      ]
+      });
+    </script>
+  </body>
+</html>
+```
