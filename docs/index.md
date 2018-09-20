@@ -1,5 +1,20 @@
 # Curso WebGIS. Mapas libres con Leaflet y OpenLayers
 
+## Autores del Taller
+
+<img src="https://avatars3.githubusercontent.com/u/932124?s=460&v=4" style="width: 80px; border-radius: 50%;">
+Francisco Puga. [@fpuga](https://twitter.com/fpuga). Desarrollador GIS en iCarto<br>
+<img src="https://pbs.twimg.com/profile_images/2673025106/8052b148e8ddc9fbb19d3ed007d392b3_400x400.png" style="width: 80px; border-radius: 50%;">
+Micho García. [@michogar](https://twitter.com/michogar). Desarrollador GIS en geomati.co<br>
+
+## Licencia
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.
+
+## Organizado por
+
+![Galpon](_images/normal_transparente.png)
+![Amtegag](_images/amtega-xunta_1024.png)
+
 ## Requerimientos
 Para un correcto seguimiento del curso el alumno deberá tener conocimientos de:
 
@@ -35,8 +50,6 @@ El curso es eminentemente práctico por lo que se irán avanzando en los supuest
     1. Consultando una capa al servidor
     2. Consultando una capa en el cliente
 6. ¡¡Quiero tener mis datos!!
-    1. Publicando datos con GeoServer
-    2. Carto, Mapbox
-    3. Usando OpenStreetMap como fuente de datos, Tilemill
+    1. [Usando OpenStreetMap como fuente de datos, Tilemill. Enlace a GeoTalleres](https://geotalleres.readthedocs.io/es/latest/josm-imposm-tilemill/index.html)
 
 
