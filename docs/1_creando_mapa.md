@@ -9,7 +9,7 @@ OpenLayers hace que sea fácil poner un mapa dinámico en cualquier página web.
 
 Lo primero que necesitaremos para crear nuestro mapa web será crear un nuevo proyecto. Este proyecto será sobre el que iremos trabajando, así que ,!tenedlo ordenado¡.
 
-Crearemos la carpeta `curso-webgis` donde comenzaremos creando nuestro primer visor. Para ello dentro de la carpeta crearemos un archivo `index.html` con el siguiente contenido:
+Crearemos la carpeta `curso-webgis` donde comenzaremos creando nuestro primer visor. Para ello dentro de la carpeta crearemos otra capeta `ol-basic` y dentro un archivo `index.html` con el siguiente contenido:
 
 ```html
 <!doctype html>
