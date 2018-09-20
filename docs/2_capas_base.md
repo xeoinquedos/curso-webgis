@@ -1,4 +1,10 @@
 # El mapa sin datos. Añadir una capa base
+
+!!! note "Autores"
+    * Micho García · [@michogar](https://twitter.com/michogar) · [micho.garcia@geomati.co](micho.garcia@geomati.co)
+!!! note "Licencia"
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.
+    
 Como hemos visto antes, hemos podido ver datos en el momento que hemos añadido la capa de OpenStreetMap. Uno de los primeros retos con los que se enfrenta uno al crear visores web es el crear un mapa con una capa base. Hasta ahora el uso de Google Maps ha difundido la imagen del mapa con las diferentes capas que Google proporciona, satélite, terreno y mapas.
 
 Utilizando las librerías de mapas libres como Ol y Leeaflet, podremos realizar visores similares utilizando los servicios de mapas globales más comunes como son Bing o Google Maps.

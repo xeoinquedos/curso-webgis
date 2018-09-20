@@ -1,5 +1,10 @@
 # Mas allá de la capa base, añadiendo mis propios datos
 
+!!! note "Autores"
+    * Micho García · [@michogar](https://twitter.com/michogar) · [micho.garcia@geomati.co](micho.garcia@geomati.co)
+!!! note "Licencia"
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.
+
 Hasta ahora hemos estado configurando capas que utilizábamos como base de nuestro mapa. Ahora queremos ir un paso más allá y mostrar datos por encima de esa capa base. De esta manera podríamos mostrar datos de carreteras, de rios, zonas de pesca o lo que nos sea interesante. 
 
 La primera interacción la haremos mostrando datos vectoriales. ¿Qué son los datos vectoriales?. Dentro del mundo de los datos geográficos, existen dos tipos de datos importantes, los vectoriales y los raster. 

@@ -1,5 +1,10 @@
 # 5. Interactuando con el mapa
 
+!!! note "Autores"
+    * Micho García · [@michogar](https://twitter.com/michogar) · [micho.garcia@geomati.co](micho.garcia@geomati.co)
+!!! note "Licencia"
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.
+
 Hasta ahora todo lo que hemos realizado con OpenLayers es la visualización de datos. En este punto de curso, trabajaremos con la interacción del usuario con el mapa a través de los controles que la librería pone a nuestra disposición.
 
 En primer lugar instalaremos algunos de los controles básicos para tener un primer acercamiento al uso de estos dentro de la librería.
