@@ -51,5 +51,8 @@ El curso es eminentemente práctico por lo que se irán avanzando en los supuest
     2. Consultando una capa en el cliente
 6. ¡¡Quiero tener mis datos!!
     1. [Usando OpenStreetMap como fuente de datos, Tilemill. Enlace a GeoTalleres](https://geotalleres.readthedocs.io/es/latest/josm-imposm-tilemill/index.html)
+7. Extras
+    1. Un visor rápido con datos vectoriales de OSM usando uMap
+
 
 
