@@ -6,6 +6,8 @@ markdown_extensions:
   - codehilite:
       linenums: True
   - admonition
+  - markdown_include.include:
+      base_path: docs
 nav:
   - Home: index.md
   - 1. Creando un mapa: 1_creando_mapa.md
