@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Interactuando con el servidor con Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0px;
+        }
+        .map,
+        #info {
+            height: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <div id="info" style="width: 100%;"></div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script>
+        let map = L.map('map').setView([42.2, -8.8], 12);
+        // http://maps.stamen.com/
+        // o con un plugin: https://github.com/leaflet-extras/leaflet-providers
+        L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+        }).addTo(map);
+        let baseURL = 'http://wms.mapama.es/sig/Agua/RedHidrograficaMDT/wms.aspx'
+        let rios = L.tileLayer.wms(baseURL, {
+            layers: 'HY.PhysicalWaters.Waterbodies',
+            transparent: true,
+            format: 'image/png',
+        }).addTo(map);
+        map.on('click', function(e) {
+            let url = buildURL(e);
+            console.log(url.href)
+            document.getElementById('info').innerHTML = '<iframe seamless src="' + url + '" style="width: 98%; height: 98%"></iframe>';
+        })
+        let defaultParameters = {
+            service: 'WFS',
+            version: '1.3.0',
+            info_format: 'text/html',
+            query_layers: 'HY.PhysicalWaters.Waterbodies',
+            layers: 'HY.PhysicalWaters.Waterbodies',
+            styles: '',
+            transparent: true,
+            format: 'image/png',
+            request: 'GetFeatureInfo',
+            crs: 'EPSG:4326',
+        }
+        const buildURL = function(e) {
+            let height = map.getSize().y;
+            let width = map.getSize().x;
+            let bounds = map.getBounds();
+            let west = bounds.getWest();
+            let south = bounds.getSouth();
+            let east = bounds.getEast();
+            let north = bounds.getNorth();
+            let bbox = `${south},${west},${north},${east},EPSG:4326`
+            let i = e.containerPoint.x;
+            let j = e.containerPoint.y;
+            const params = Object.assign({}, {
+                bbox,
+                i,
+                j,
+                height,
+                width,
+            }, defaultParameters);
+            const urlParams = new URLSearchParams(params);
+            const url = new URL(baseURL);
+            for (let pair of urlParams.entries()) {
+                url.searchParams.set(pair[0], pair[1])
+            }
+            return url;
+        }
+
+    </script>
+</body>
+</html>
