@@ -15,4 +15,5 @@ nav:
   - 3. Mas allá de la capa base, añadiendo mis propios datos: 3_mis_datos.md
   - 4. Y si los datos son enormes: 4_wms_wmts.md
   - 5. Interactuando con el mapa: 5_interactuando_mapa.md
+  - 6. Usando OpenStreetMap como fuente de datos, Tilemill. Enlace a GeoTalleres: 6_osm_y_tilemill.md
   - 7. Extra 1. Un visor rápido con datos vectoriales de OSM usando uMap: 7_extra_1_osm_y_umap.md
