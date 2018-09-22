@@ -7,7 +7,7 @@
 Creamos el esqueleto del visor con una capa base del PNOA
 
 ```html
-{!leaflet/curso-webgis/lf-gml/index.1.html!}
+{!leaflet/curso-webgis/lf-geojson/index.1.html!}
 ```
 
 ### Cargamos un GeoJSON externo mediante script
@@ -33,7 +33,7 @@ vigo_geojson =
 y cargarlo como un script.
 
 ```html hl_lines="19 30"
-{!leaflet/curso-webgis/lf-gml/index.2.html!}
+{!leaflet/curso-webgis/lf-geojson/index.2.html!}
 ```
 
 ### Leaflet, GeoJSON con geometrías "Punto", y los Marker
@@ -45,7 +45,7 @@ Leaflet las interpreta por defecto como un objeto de tipo [L.Marker](https://lea
 Prueba a eliminar la llamada L.geoJSON del código y añadir un marcador simple al mapa en las mismas coordenadas:
 
 ```html
-{!leaflet/curso-webgis/lf-gml/index.3.html!}
+{!leaflet/curso-webgis/lf-geojson/index.3.html!}
 ```
 
 !!! warning "Atención"
@@ -57,7 +57,7 @@ Tratemos de cambiar un poco el marcador por defecto. Si buscas iconos para tus m
 Fijate en como hemos usado el className para poder usar css para modificar el estilo del elemento `img` con el Leaflet incrusta el icono en el mapa
 
 ```html
-{!leaflet/curso-webgis/lf-gml/index.4.html!}
+{!leaflet/curso-webgis/lf-geojson/index.4.html!}
 ```
 
 ### Representar los `Point` como `CircleMarker`
@@ -67,7 +67,7 @@ Si queremos cambiar el ícono de nuestros puntos geojson, o usar otro tipo de re
 Leaflet proporciona un hook [pointToLayer](https://leafletjs.com/reference-1.3.4.html#geojson-pointtolayer) que se puede pasar en la creación de la capa geoJSON, esa función será llamada para cada feature de tipo punto de la capa.
 
 ```html
-{!leaflet/curso-webgis/lf-gml/index.5.html!}
+{!leaflet/curso-webgis/lf-geojson/index.5.html!}
 ```
 
     
@@ -80,7 +80,7 @@ Hasta ahora estábamos cargando el GeoJSON como un script, pero es habitual que 
 Simplemente debemos recuperarlos de la forma que estamos acostumbrados por ejemplo [$.getJSON](https://api.jquery.com/jquery.getjson/) o con [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ```html
-{!leaflet/curso-webgis/lf-gml/index.6.html!}
+{!leaflet/curso-webgis/lf-geojson/index.6.html!}
 ```
 
 ## El formato GeoJSON

@@ -46,7 +46,7 @@ Este último es un dato vectorial en formato [GeoJSON Wikipedia](https://en.wiki
 
 ![](_images/200.gif)
 
-Si ahora quisiéramos visualizar este archivo en un visor, lo primero que haremos será crear una carpeta `ol-gml` donde crearemos de nuevo nuestro archivo `index.html` con el esqueleto de nuestro visor y con alguna de las capas base que hemos visto anteriormente.
+Si ahora quisiéramos visualizar este archivo en un visor, lo primero que haremos será crear una carpeta `ol-geojson` donde crearemos de nuevo nuestro archivo `index.html` con el esqueleto de nuestro visor y con alguna de las capas base que hemos visto anteriormente.
 
 ```html
 <!DOCTYPE html>
@@ -80,7 +80,7 @@ Si ahora quisiéramos visualizar este archivo en un visor, lo primero que haremo
 </html>
 ```
 
-Para poder visualizar nuestro dato vectorial, deberemos tener el mismo accesible desde nuestro visor. Para ello crearemos un archivo `vigo.gml` en la carpeta anterior `ol-gml` y copiaremos
+Para poder visualizar nuestro dato vectorial, deberemos tener el mismo accesible desde nuestro visor. Para ello crearemos un archivo `vigo.geojson` en la carpeta anterior `ol-geojson` y copiaremos
 
 ```JSON
 {
@@ -95,7 +95,7 @@ Para poder visualizar nuestro dato vectorial, deberemos tener el mismo accesible
 ]}
 ```
 
-Ahora si vamos a nuestro navegador a la ruta [http://localhost:8080/vigo.gml](http://localhost:8080/vigo.gml) este debería descargarnos el archivo que acabamos de crear.
+Ahora si vamos a nuestro navegador a la ruta [http://localhost:8080/vigo.geojson](http://localhost:8080/vigo.geojson) este debería descargarnos el archivo que acabamos de crear.
 
 Ahora añadiremos este dato a nuestro visor. Para ello utilizaremos una nueva capa con una nueva fuente de datos. 
 
@@ -118,7 +118,7 @@ Ahora añadiremos este dato a nuestro visor. Para ello utilizaremos una nueva ca
       })
       const vigo = new ol.layer.Vector({
 		source: new ol.source.Vector({
-			url: "vigo.gml",
+			url: "vigo.geojson",
 			format: new ol.format.GeoJSON()
 		})
 	  })
