@@ -206,7 +206,7 @@ const map = new Map({
 
 y seguidamente un fichero `index.html`
 
-```html
+```html hl_lines="12"
 <!DOCTYPE html>
 <html>
   <head>
@@ -217,6 +217,10 @@ y seguidamente un fichero `index.html`
         height: 100%;
       }
     </style>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCqPQ0dabDFcqSrjGVLvWGyDU3RSgAXayo">
+    </script>
+ 
   </head>
   <body>
     <div id="map"></div>
