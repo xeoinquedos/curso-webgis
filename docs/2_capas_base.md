@@ -256,30 +256,7 @@ si ahora ejecutamos `npm start` podremos ver el visor en [http://localhost:1234/
 Añadiremos la capa de Google haciendo uso de la librería de Mapgears:
 
 ```JavaScript hl_lines="4 5 6 8 10 15 23 24"
-import 'ol/ol.css';
-import 'olgm/olgm.css';
-import {Map, View} from 'ol';
-import GoogleLayer from 'olgm/layer/Google.js';
-import {defaults} from 'olgm/interaction.js';
-import OLGoogleMaps from 'olgm/OLGoogleMaps.js';
-
-var center = [0, 0];
-
-const googleLayer = new GoogleLayer();
-
-const map = new Map({
-  target: 'map',
-  layers: [
-    googleLayer
-  ],
-  view: new View({
-    center: [0, 0],
-    zoom: 0
-  })
-});
-
-var olGM = new OLGoogleMaps({map: map});
-olGM.activate();
+{!openlayers/ol-googlemaps/index.js!}
 ```
 
 Es posible que nos encontremos problemas a la hora de consumir los servicios de mapas de Google debido a las restricciones de uso de las Keys.
