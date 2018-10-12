@@ -1,4 +1,6 @@
 site_name: Curso WebGIS. Mapas libres con Leaflet y OpenLayers
+repo_url: https://github.com/xeoinquedos/curso-webgis/
+repo_name: Curso WebGIS
 theme:
   name: material
   language: 'es'
