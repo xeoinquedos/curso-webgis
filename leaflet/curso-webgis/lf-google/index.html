@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Google Maps</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqPQ0dabDFcqSrjGVLvWGyDU3RSgAXayo" async defer></script>
+    <style>
+        html,
+        body,
+        .map {
+            height: 100%;
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+    <script>
+        let baseLayers = {
+            'Google Roads': L.gridLayer.googleMutant({
+                type: 'roadmap'
+            }),
+            'Google Satellite': L.gridLayer.googleMutant({
+                type: 'satellite'
+            }),
+            'Google Terrain': L.gridLayer.googleMutant({
+                type: 'terrain'
+            }),
+            'Google Hybrid': L.gridLayer.googleMutant({
+                type: 'hybrid'
+            }),
+        }
+        let map = L.map('map').setView([0, 0], 1);
+        baseLayers['Google Roads'].addTo(map);
+        L.control.layers(baseLayers).addTo(map);
+
+    </script>
+</body>
+</html>

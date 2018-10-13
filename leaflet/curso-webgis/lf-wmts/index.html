@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>WMTS y Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <style>
+        html,
+        body,
+        .map {
+            height: 100%;
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://rawgithub.com/mylen/leaflet.TileLayer.WMTS/master/leaflet-tilelayer-wmts.js"></script>
+    <script>
+        let map = L.map('map', {
+            center: [42.2, -8.8],
+            zoom: 12,
+            crs: L.CRS.EPSG4326,
+        });
+        const url = 'http://www.ign.es/wmts/mapa-raster';
+        var ign = new L.TileLayer.WMTS(url, {
+            layer: 'MTN',
+            style: 'normal',
+            tilematrixSet: 'EPSG:4326',
+            format: 'image/jpeg',
+            attribution: '© Instituto Geográfico Nacional de España',
+        }).addTo(map);
+
+    </script>
+</body>
+</html>

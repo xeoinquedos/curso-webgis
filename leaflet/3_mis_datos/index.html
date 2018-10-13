@@ -1,0 +1,1377 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+    
+    
+      
+        <title>Mas allá de la capa base, añadiendo mis propios datos - Curso WebGIS. Mapas libres con Leaflet y OpenLayers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#mas-alla-de-la-capa-base-anadiendo-mis-propios-datos" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Curso WebGIS. Mapas libres con Leaflet y OpenLayers" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Curso WebGIS. Mapas libres con Leaflet y OpenLayers
+              </span>
+              <span class="md-header-nav__topic">
+                Mas allá de la capa base, añadiendo mis propios datos
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/xeoinquedos/curso-webgis/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Curso WebGIS
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Curso WebGIS. Mapas libres con Leaflet y OpenLayers" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Curso WebGIS. Mapas libres con Leaflet y OpenLayers
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/xeoinquedos/curso-webgis/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Curso WebGIS
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../1_creando_mapa/" title="1. Creando un mapa" class="md-nav__link">
+      1. Creando un mapa
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../2_capas_base/" title="2. El mapa sin datos. Añadir una capa base" class="md-nav__link">
+      2. El mapa sin datos. Añadir una capa base
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../3_mis_datos/" title="3. Mas allá de la capa base, añadiendo mis propios datos" class="md-nav__link">
+      3. Mas allá de la capa base, añadiendo mis propios datos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../4_wms_wmts/" title="4. Y si los datos son enormes" class="md-nav__link">
+      4. Y si los datos son enormes
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../5_interactuando_mapa/" title="5. Interactuando con el mapa" class="md-nav__link">
+      5. Interactuando con el mapa
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../6_osm_y_tilemill/" title="6. Usando OpenStreetMap como fuente de datos, Tilemill. Enlace a GeoTalleres" class="md-nav__link">
+      6. Usando OpenStreetMap como fuente de datos, Tilemill. Enlace a GeoTalleres
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../7_extra_1_osm_y_umap/" title="7. Extra 1. Un visor rápido con datos vectoriales de OSM usando uMap" class="md-nav__link">
+      7. Extra 1. Un visor rápido con datos vectoriales de OSM usando uMap
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datos-vectoriales" title="Datos vectoriales" class="md-nav__link">
+    Datos vectoriales
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cargamos-un-geojson-externo-mediante-script" title="Cargamos un GeoJSON externo mediante script" class="md-nav__link">
+    Cargamos un GeoJSON externo mediante script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leaflet-geojson-con-geometrias-punto-y-los-marker" title="Leaflet, GeoJSON con geometrías "Punto", y los Marker" class="md-nav__link">
+    Leaflet, GeoJSON con geometrías "Punto", y los Marker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representar-los-point-como-circlemarker" title="Representar los Point como CircleMarker" class="md-nav__link">
+    Representar los Point como CircleMarker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtener-un-geojson-por-url" title="Obtener un GeoJSON por "url"" class="md-nav__link">
+    Obtener un GeoJSON por "url"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-formato-geojson" title="El formato GeoJSON" class="md-nav__link">
+    El formato GeoJSON
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-servicio-wfs-web-feature-service" title="El Servicio WFS, Web Feature Service" class="md-nav__link">
+    El Servicio WFS, Web Feature Service
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leaflet-geojson-y-el-crs" title="Leaflet, GeoJSON y el CRS" class="md-nav__link">
+    Leaflet, GeoJSON y el CRS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/xeoinquedos/curso-webgis/edit/master/docs/leaflet/3_mis_datos.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="mas-alla-de-la-capa-base-anadiendo-mis-propios-datos">Mas allá de la capa base, añadiendo mis propios datos</h1>
+<div class="admonition note">
+<p class="admonition-title">Autores</p>
+<ul>
+<li>Francisco Puga · <a href="https://twitter.com/fpuga">@fpuga</a> · <a href="fpuga@icarto.es">fpuga@icarto.es</a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Licencia</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a></p>
+</div>
+<h2 id="datos-vectoriales">Datos vectoriales</h2>
+<p>Creamos el esqueleto del visor con una capa base del PNOA</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>GeoJSON y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kr">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span> <span class="mi">12</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">PNOA</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="cargamos-un-geojson-externo-mediante-script">Cargamos un GeoJSON externo mediante script</h3>
+<p>Al contrario que OpenLayers Leaflet no tiene métodos "nativos" para acceder a una url externa que represente un GeoJSON. La persona que desarrolle el mapa es la responsable de pasar el contenido del GeoJSON a Leaflet.</p>
+<p>Una de las formas más sencillas de hacer esto, es "convertir" el fichero GeoJSON en un fichero "javascript"</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="hll"><span class="nx">vigo_geojson</span> <span class="o">=</span> 
+</span>    <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;FeatureCollection&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;vigo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;crs&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;urn:ogc:def:crs:OGC:1.3:CRS84&quot;</span> <span class="p">}</span> <span class="p">},</span>
+        <span class="s2">&quot;features&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Nombre&quot;</span><span class="o">:</span> <span class="s2">&quot;Vigo&quot;</span><span class="p">,</span> <span class="s2">&quot;Poblacion&quot;</span><span class="o">:</span> <span class="mi">500000</span> <span class="p">},</span> 
+            <span class="s2">&quot;geometry&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="o">-</span><span class="mf">8.733678516914864</span><span class="p">,</span> <span class="mf">42.219577180236797</span> <span class="p">]</span> <span class="p">}</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>y cargarlo como un script.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>GeoJSON y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="hll">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span>    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;vigo_js.geojson&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kr">const</span> <span class="nx">PNOA</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">});</span>
+        <span class="kr">const</span> <span class="nx">vigo</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">geoJSON</span><span class="p">(</span><span class="nx">vigo_geojson</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="p">[</span>
+                <span class="nx">PNOA</span><span class="p">,</span>
+<span class="hll">                <span class="nx">vigo</span>
+</span>            <span class="p">]</span>
+        <span class="p">}).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span> <span class="mi">12</span><span class="p">);</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="leaflet-geojson-con-geometrias-punto-y-los-marker">Leaflet, GeoJSON con geometrías "Punto", y los Marker</h3>
+<p>Otro punto que suele sorprender a la gente que se introduce en Leaflet, es como trata esta librería las features GeoJSON con una geometría de tipo <code>Point</code>.</p>
+<p>Leaflet las interpreta por defecto como un objeto de tipo <a href="https://leafletjs.com/reference-1.3.4.html#marker">L.Marker</a>. Que en la práctica podemos considerar como iconos. Y por tanto su opción principal de estilo es cambiar el icono que empleamos para mostrarla.</p>
+<p>Prueba a eliminar la llamada L.geoJSON del código y añadir un marcador simple al mapa en las mismas coordenadas:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>GeoJSON y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;vigo_js.geojson&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kr">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span> <span class="mi">12</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">PNOA</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+        <span class="c1">// L.geoJSON(vigo_geojson).addTo(map);</span>
+        <span class="nx">L</span><span class="p">.</span><span class="nx">marker</span><span class="p">([</span><span class="o">-</span><span class="mf">8.733678516914864</span><span class="p">,</span> <span class="mf">42.219577180236797</span><span class="p">]).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>¿No aparece el marcador? ¿Por qué será?</p>
+</div>
+<p>Tratemos de cambiar un poco el marcador por defecto. Si buscas iconos para tus mapas un buen punto para empezar es la librería <a href="https://www.mapbox.com/maki-icons/">Maki de Mapbox</a>.</p>
+<p>Fijate en como hemos usado el className para poder usar css para modificar el estilo del elemento <code>img</code> con el Leaflet incrusta el icono en el mapa</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>GeoJSON y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="p">.</span><span class="nc">town-icon</span> <span class="p">{</span>
+            <span class="k">background-color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;vigo_js.geojson&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kr">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span> <span class="mi">12</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">PNOA</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+        <span class="nx">L</span><span class="p">.</span><span class="nx">marker</span><span class="p">([</span><span class="mf">42.21</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.73</span><span class="p">],</span> <span class="p">{</span>
+            <span class="nx">icon</span><span class="o">:</span> <span class="nx">L</span><span class="p">.</span><span class="nx">icon</span><span class="p">({</span>
+                <span class="nx">iconUrl</span><span class="o">:</span> <span class="s1">&#39;town-15.svg&#39;</span><span class="p">,</span> <span class="c1">// cuidado con las rutas</span>
+                <span class="nx">iconSize</span><span class="o">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span>
+                <span class="nx">className</span><span class="o">:</span> <span class="s1">&#39;town-icon&#39;</span>
+            <span class="p">})</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="representar-los-point-como-circlemarker">Representar los <code>Point</code> como <code>CircleMarker</code></h3>
+<p>Si queremos cambiar el ícono de nuestros puntos geojson, o usar otro tipo de representación "vectorial" para ellos como <a href="https://leafletjs.com/reference-1.3.4.html#circlemarker">L.CircleMarker</a> es un pelín más complicado.</p>
+<p>Leaflet proporciona un hook <a href="https://leafletjs.com/reference-1.3.4.html#geojson-pointtolayer">pointToLayer</a> que se puede pasar en la creación de la capa geoJSON, esa función será llamada para cada feature de tipo punto de la capa.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>GeoJSON y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;vigo_js.geojson&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kr">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span> <span class="mi">12</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">PNOA</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">geojsonMarkerOptions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1">// Stroke</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="nx">weight</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">opacity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="c1">// Fill</span>
+            <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+            <span class="nx">fillOpacity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="c1">// Radius</span>
+            <span class="nx">radius</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="p">};</span>
+        <span class="nx">L</span><span class="p">.</span><span class="nx">geoJSON</span><span class="p">(</span><span class="nx">vigo_geojson</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">pointToLayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">,</span> <span class="nx">latlng</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">L</span><span class="p">.</span><span class="nx">circleMarker</span><span class="p">(</span><span class="nx">latlng</span><span class="p">,</span> <span class="nx">geojsonMarkerOptions</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<p>¿Y si quiero aplicar una simbología distinta en función de una variable alfnumérica? El <a href="https://leafletjs.com/examples/geojson/">tutorial de Leaflet</a> lo explica, las funciones <a href="https://leafletjs.com/reference-1.3.4.html#geojson-style">style</a>, <a href="https://leafletjs.com/reference-1.3.4.html#geojson-pointtolayer">pointToLayer</a> y <a href="https://leafletjs.com/reference-1.3.4.html#geojson-oneachfeature">onEachFeature</a> son tus amigas. ¡Pruebalo!</p>
+<h3 id="obtener-un-geojson-por-url">Obtener un GeoJSON por "url"</h3>
+<p>Hasta ahora estábamos cargando el GeoJSON como un script, pero es habitual que estos datos provengan de un servicio externo o queramos cargarlos mediante llamadas asíncronas.</p>
+<p>Simplemente debemos recuperarlos de la forma que estamos acostumbrados por ejemplo <a href="https://api.jquery.com/jquery.getjson/">$.getJSON</a> o con <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch</a></p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>GeoJSON y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kr">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span> <span class="mi">12</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">PNOA</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">geojsonMarkerOptions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1">// Stroke</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="nx">weight</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">opacity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="c1">// Fill</span>
+            <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+            <span class="nx">fillOpacity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="c1">// Radius</span>
+            <span class="nx">radius</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="p">};</span>
+        <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;vigo.geojson&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">vigo_geojson</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">L</span><span class="p">.</span><span class="nx">geoJSON</span><span class="p">(</span><span class="nx">vigo_geojson</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">pointToLayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">,</span> <span class="nx">latlng</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">L</span><span class="p">.</span><span class="nx">circleMarker</span><span class="p">(</span><span class="nx">latlng</span><span class="p">,</span> <span class="nx">geojsonMarkerOptions</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+        <span class="p">});</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="el-formato-geojson">El formato GeoJSON</h2>
+<h2 id="el-servicio-wfs-web-feature-service">El Servicio WFS, Web <strong>Feature</strong> Service</h2>
+<p>Como explicamos al hablar de GeoJSON Leaflet no proporciona un método nativo para hacer peticiones ajax a este tipo de recursos.</p>
+<p>Así que debemos obtener todas las features en la carga inicial, descargarlas dinámicamente mediante código a medida o usar algún tipo de plugin.</p>
+<p>En <a href="https://mappinggis.com/2016/06/anadir-servicio-wfs-leaflet/">este tutorial</a> puedes ver como usar un plugin de WFS.</p>
+<p>Este <a href="https://github.com/stefanocudini/leaflet-layerjson">otro plugin</a> permite la carga dinámica de GeoJSON en función de los movimientos del usuario por el mapa cacheando la respuesta. No es específico de WFS pero encaja bien en lo que hace OpenLayers.</p>
+<p>En este tutorial vamos a hacer una implementación con código a medida muy simple a efectos de entender que es lo que está sucediendo. Hemos complicado un poco algunas partes del código, simplemente por entender la complejidad que puede llegar a tener trabajar con sistemas de coordenadas y la construcción de peticiones a servicios WFS.</p>
+<p>En primer lugar construimos nuestro mapa como es habitual, pero en este caso añadiremos una capa GeoJSON vacía que rellenaremos en cada movimiento del usuario con nuevos datos.</p>
+<p>Primero construiremos una URL base con la que hacer las peticiones al servicio WFS. Podríamos hacerlo simplemente concatenando y substituyendo strings o <a href="https://leafletjs.com/reference-1.3.4.html#util">usando alguna utilidad</a> de Leaflet como hacen <a href="http://jsfiddle.net/expedio/8r1ncv6a/">en este ejemplo</a>. Usaremos "es6".</p>
+<p>Para construír nuestra url necesitamos obtener los límites (bounds) de nuestro mapa. Aquí la cosa se complica un poco. Leaflet usa por defecto el EPSG:3857 (coordenadas proyectadas) pero las coordenadas que introducimos o nos devuelven los métodos son geográficas. Si hacemos una petición a un servicio WFS usando como parámetro <code>srsname: 'EPSG:3857'</code>, las coordenadas del bbox deben ir en proyectadas y no en geográficas. Por lo que debemos "transformar" las coordenadas</p>
+<p>El orden concreto en que se deben especificar las coordenadas en un parámetro BBOX puede depender del protocolo, la versión, el EPSG y la implementación concreta del software. Probablemente lo mejor sea probar. Para el caso que nos ocupa, al parámetro <a href="http://docs.geoserver.org/latest/en/user/services/wfs/reference.html#getfeature">BBox del WFS</a> dice:</p>
+<blockquote>
+<p>As for which corners of the bounding box to specify, the only requirement is for a 
+bottom corner (left or rightto be provided first. For example, bottom left and top right,
+or bottom right and top left.)</p>
+</blockquote>
+<p>es decir en Geoserver se le pasa primero una cualquiera de las esquinas inferior y luego una superior.</p>
+<p>El orden de las coordenadas en cada punto para <a href="http://epsg.io/3857">EPSG:3857</a> es <code>este, norte</code>. Y además en el parámetro de <code>bbox</code> especificamos en que CRS estamos pasando las coordenadas para evitar errores.</p>
+<p>Después pondremos un listener <code>moveend</code>, que escuche la interacción del usuario con el mapa, pan y zoom, y pida los nuevos datos tras cada movimiento.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>WFS y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kd">let</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span> <span class="mi">12</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">pnoaOrthoWMS</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">geojsonLayer</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">geoJSON</span><span class="p">();</span>
+        <span class="nx">map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">geojsonLayer</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">baseURL</span> <span class="o">=</span> <span class="s1">&#39;https://cors-anywhere.herokuapp.com/http://ideadif.adif.es/gservices/Tramificacion/wfs&#39;</span>
+        <span class="kd">let</span> <span class="nx">defaultParameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">service</span><span class="o">:</span> <span class="s1">&#39;WFS&#39;</span><span class="p">,</span>
+            <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;1.1.0&#39;</span><span class="p">,</span>
+            <span class="nx">request</span><span class="o">:</span> <span class="s1">&#39;GetFeature&#39;</span><span class="p">,</span>
+            <span class="nx">typename</span><span class="o">:</span> <span class="s1">&#39;Tramificacion:TramosFueraServicio&#39;</span><span class="p">,</span>
+            <span class="nx">outputFormat</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+            <span class="nx">srsname</span><span class="o">:</span> <span class="s1">&#39;EPSG:3857&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="kr">const</span> <span class="nx">buildURL</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bbox</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="p">{</span>
+                <span class="nx">bbox</span><span class="o">:</span> <span class="nx">bbox</span>
+            <span class="p">},</span> <span class="nx">defaultParameters</span><span class="p">);</span>
+            <span class="kr">const</span> <span class="nx">urlParams</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+            <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">baseURL</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">pair</span> <span class="k">of</span> <span class="nx">urlParams</span><span class="p">.</span><span class="nx">entries</span><span class="p">())</span> <span class="p">{</span>
+                <span class="nx">url</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">url</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">const</span> <span class="nx">getBoundsIn3857</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">sm</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">Projection</span><span class="p">.</span><span class="nx">SphericalMercator</span><span class="p">;</span>
+            <span class="kr">const</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">();</span>
+            <span class="kr">const</span> <span class="nx">southWest</span> <span class="o">=</span> <span class="nx">sm</span><span class="p">.</span><span class="nx">project</span><span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">getSouthWest</span><span class="p">());</span>
+            <span class="kr">const</span> <span class="nx">northEast</span> <span class="o">=</span> <span class="nx">sm</span><span class="p">.</span><span class="nx">project</span><span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">getNorthEast</span><span class="p">());</span>
+            <span class="kr">const</span> <span class="nx">northWest</span> <span class="o">=</span> <span class="nx">sm</span><span class="p">.</span><span class="nx">project</span><span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">getNorthWest</span><span class="p">());</span>
+            <span class="kr">const</span> <span class="nx">southEast</span> <span class="o">=</span> <span class="nx">sm</span><span class="p">.</span><span class="nx">project</span><span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">getSouthEast</span><span class="p">());</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="nx">southWest</span><span class="p">,</span>
+                <span class="nx">northEast</span><span class="p">,</span>
+                <span class="nx">northWest</span><span class="p">,</span>
+                <span class="nx">southEast</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="kr">const</span> <span class="nx">getBBoxStringForGeoserver3857WithMapIn3857</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">getBoundsIn3857</span><span class="p">();</span>
+            <span class="kr">const</span> <span class="nx">southWest_East</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">southWest</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+            <span class="kr">const</span> <span class="nx">southWest_North</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">southWest</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+            <span class="kr">const</span> <span class="nx">northEast_East</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">northEast</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+            <span class="kr">const</span> <span class="nx">northEast_North</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">northEast</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+            <span class="kr">const</span> <span class="nx">bbox</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">southWest_East</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">southWest_North</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">northEast_East</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">northEast_North</span><span class="si">}</span><span class="sb">,EPSG:3857`</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">bbox</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">const</span> <span class="nx">onMoveEnd</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">bbox</span> <span class="o">=</span> <span class="nx">getBBoxStringForGeoserver3857WithMapIn3857</span><span class="p">();</span>
+            <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">buildURL</span><span class="p">(</span><span class="nx">bbox</span><span class="p">);</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">json</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">geojsonLayer</span><span class="p">.</span><span class="nx">addData</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="nx">map</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;moveend&#39;</span><span class="p">,</span> <span class="nx">onMoveEnd</span><span class="p">);</span>
+        <span class="nx">onMoveEnd</span><span class="p">();</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Vale, y después de todo esto, porqué no veo nada. ¡<a href="https://duckduckgo.com/">DuckDuckGo</a>¡ es tu amigo.</p>
+</div>
+<h3 id="leaflet-geojson-y-el-crs">Leaflet, GeoJSON y el CRS</h3>
+<p>A pesar de todo lo dicho, <a href="https://tools.ietf.org/html/rfc7946#section-4">el estándar GeoJSON</a> dice que las capas deben ir en el CRS EPSG:4326, y por defecto Leaflet espera que las coordenadas vengan en este sistema.</p>
+<p>Cuando hacemos una petición al WFS indicándole otro sistema de coordenadas (EPSG:3857), Leaflet las interpreta de forma incorrecta al ser coordenadas proyectadas.</p>
+<p>Buf. Vale. Pero y entonces que hago:</p>
+<ul>
+<li>Si tu capa base admite el sistema EPSG:4326, la mayoría de los WMS lo harán, puedes usar ese CRS por defecto en Leaflet y todo es muy sencillo</li>
+<li>Si como capa base quieres usar un servicios de teselas típico como OSM o Google, vendrán siempre en 3857, por tanto tendrás que pedir las capas WFS en 4326 o <a href="https://gis.stackexchange.com/questions/189126/leaflet-geojson-with-projected-coordinates-3857">reproyectar al vuelo</a> mediante alguna librería.</li>
+</ul>
+<p>Hagamos lo primero en este ejemplo.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>WFS y Leaflet<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="nt">html</span><span class="o">,</span>
+        <span class="nt">body</span><span class="o">,</span>
+        <span class="p">.</span><span class="nc">map</span> <span class="p">{</span>
+            <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;map&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/leaflet@1.3.4/dist/leaflet.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kd">let</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">center</span><span class="o">:</span> <span class="p">[</span><span class="mf">42.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">],</span>
+            <span class="nx">zoom</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="nx">crs</span><span class="o">:</span> <span class="nx">L</span><span class="p">.</span><span class="nx">CRS</span><span class="p">.</span><span class="nx">EPSG4326</span><span class="p">,</span>
+<span class="hll">        <span class="p">});</span>
+</span>        <span class="kd">let</span> <span class="nx">pnoaOrthoWMS</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nx">wms</span><span class="p">(</span><span class="s1">&#39;http://www.ign.es/wms-inspire/pnoa-ma?&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="s1">&#39;OI.OrthoimageCoverage&#39;</span><span class="p">,</span>
+            <span class="nx">attribution</span><span class="o">:</span> <span class="s1">&#39;PNOA cedido por © &lt;a href=&quot;http://www.ign.es/ign/main/index.do&quot; target=&quot;_blank&quot;&gt;Instituto Geográfico Nacional de España&lt;/a&gt;&#39;</span>
+        <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">geojsonLayer</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">geoJSON</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">weigth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="nx">map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">geojsonLayer</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">baseURL</span> <span class="o">=</span> <span class="s1">&#39;https://cors-anywhere.herokuapp.com/http://ideadif.adif.es/gservices/Tramificacion/wfs&#39;</span>
+        <span class="kd">let</span> <span class="nx">defaultParameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">service</span><span class="o">:</span> <span class="s1">&#39;WFS&#39;</span><span class="p">,</span>
+            <span class="nx">version</span><span class="o">:</span> <span class="s1">&#39;1.1.0&#39;</span><span class="p">,</span>
+            <span class="nx">request</span><span class="o">:</span> <span class="s1">&#39;GetFeature&#39;</span><span class="p">,</span>
+            <span class="nx">typename</span><span class="o">:</span> <span class="s1">&#39;Tramificacion:TramosFueraServicio&#39;</span><span class="p">,</span>
+            <span class="nx">outputFormat</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+            <span class="nx">srsname</span><span class="o">:</span> <span class="s1">&#39;EPSG:4326&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="kr">const</span> <span class="nx">buildURL</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bbox</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="p">{</span>
+                <span class="nx">bbox</span><span class="o">:</span> <span class="nx">bbox</span>
+<span class="hll">            <span class="p">},</span> <span class="nx">defaultParameters</span><span class="p">);</span>
+</span>            <span class="kr">const</span> <span class="nx">urlParams</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+            <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">baseURL</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">pair</span> <span class="k">of</span> <span class="nx">urlParams</span><span class="p">.</span><span class="nx">entries</span><span class="p">())</span> <span class="p">{</span>
+                <span class="nx">url</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">url</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">const</span> <span class="nx">getBBoxStringForGeoserver4326WithMapIn4326</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">().</span><span class="nx">toBBoxString</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;,EPSG:4326&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">const</span> <span class="nx">onMoveEnd</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">bbox</span> <span class="o">=</span> <span class="nx">getBBoxStringForGeoserver4326WithMapIn4326</span><span class="p">();</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bbox</span><span class="p">);</span>
+<span class="hll">            <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">buildURL</span><span class="p">(</span><span class="nx">bbox</span><span class="p">);</span>
+</span>            <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">json</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">geojsonLayer</span><span class="p">.</span><span class="nx">addData</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="nx">map</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;moveend&#39;</span><span class="p">,</span> <span class="nx">onMoveEnd</span><span class="p">);</span>
+        <span class="nx">onMoveEnd</span><span class="p">();</span>
+
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<p>Si quieres continuar practicando:</p>
+<ul>
+<li>Prueba a hacer las peticiones a un servicio WFS sobre un mapa base de OSM</li>
+<li>Cachea y gestiona adecuadamente las llamadas</li>
+<li>En lugar de hacer peticiones inmediatamente tras cada movimiento, <a href="https://leafletjs.com/reference-1.3.4.html#util-throttle">espera a que el usuario acabe</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

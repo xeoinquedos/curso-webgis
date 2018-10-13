@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <title>Mi primer visor con Leaflet</title>
+    <style>
+        .map {
+            height: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script>
+        map = L.map('map', {
+            center: [-8.72, 42.24],
+            zoom: 4,
+        });
+
+    </script>
+</body>
+</html>

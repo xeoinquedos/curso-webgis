@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Bing Maps</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <style>
+        html,
+        body,
+        .map {
+            height: 100%;
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <!-- Usar está url sólo para demos, o instalar con `npm install leaflet-bing-layer` -->
+    <script src="http://lab.digital-democracy.org/leaflet-bing-layer/leaflet-bing-layer.js"></script>
+    <script>
+        const BING_API_KEY = 'AqU3C-Sa7exTZ1zqoy25oXm8H0MFgMxG3_ZKV87ZVZcX27RIzUrNQ5rQOV1DKt3t'
+        let styles = ['Road', 'Aerial', 'AerialWithLabels'];
+        let baseLayers = [];
+        let i, ii;
+        for (i = 0, ii = styles.length; i < ii; ++i) {
+            baseLayers.push(L.tileLayer.bing({
+                bingMapsKey: BING_API_KEY,
+                imagerySet: styles[i],
+            }));
+        }
+        let map = L.map('map', {
+            center: [0, 0],
+            zoom: 1,
+            // layers: baseLayers
+        });
+
+    </script>
+</body>
+</html>

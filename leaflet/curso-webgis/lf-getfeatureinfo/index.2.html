@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Interactuando con el servidor con Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0px;
+        }
+        .map,
+        #info {
+            height: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <div id="info" style="width: 100%;"></div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
+    <script src="http://heigeo.github.io/leaflet.wms/dist/leaflet.wms.js"></script>
+    <script>
+        var MySource = L.WMS.Source.extend({
+            getFeatureInfo: function(point, latlng, layers, callback) {
+                // Request WMS GetFeatureInfo and call callback with results
+                // (split from identify() to faciliate use outside of map events)
+                var params = this.getFeatureInfoParams(point, layers),
+                    url = this._url + L.Util.getParamString(params, this._url);
+                if (url) {
+                    document.getElementById('info').innerHTML = '<iframe seamless src="' + url + '" style="width: 100%; height: 300px"></iframe>';
+                }
+            }
+        });
+        let map = L.map('map').setView([42.2, -8.8], 12);
+        L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+        }).addTo(map);
+        let baseURL = 'http://wms.mapama.es/sig/Agua/RedHidrograficaMDT/wms.aspx'
+        var source = new MySource(baseURL, {
+            'transparent': true,
+            'format': 'image/png',
+            'info_format': 'text/html',
+        });
+        source.getLayer('HY.PhysicalWaters.Waterbodies').addTo(map);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>GeoJSON y Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <style>
+        html,
+        body,
+        .map {
+            height: 100%;
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="vigo_js.geojson"></script>
+    <script>
+        const PNOA = L.tileLayer.wms('http://www.ign.es/wms-inspire/pnoa-ma?', {
+            layers: 'OI.OrthoimageCoverage',
+            attribution: 'PNOA cedido por © <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
+        });
+        const vigo = L.geoJSON(vigo_geojson);
+        const map = L.map('map', {
+            layers: [
+                PNOA,
+                vigo
+            ]
+        }).setView([42.2, -8.8], 12);
+
+    </script>
+</body>
+</html>
